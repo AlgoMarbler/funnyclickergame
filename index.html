@@ -19,7 +19,8 @@
     <script type="text/javascript">
         var test = 0;
         var increment = 1;
-        var cheat = 0;
+        var cheater = 0;
+        var $ = 0;
 
         function formatNumber(number) {
             if (number >= 1e15) {
@@ -70,7 +71,8 @@
             var cheatValue = parseFloat(document.getElementById('cheat_input').value);
             if (!isNaN(cheatValue)) {
                 test += cheatValue;
-                cheat += cheatValue;
+                $ += cheatValue;
+                cheater = $;
                 updateResult();
             }
         }
@@ -98,6 +100,12 @@
             document.getElementById('ans_display').innerHTML = ans;
             return ans;
         }
+
+        function updateAndRender() {
+              cheater = $;
+              requestAnimationFrame(updateAndRender);
+            }
+            updateAndRender();
     </script>
 </head>
 <body>
