@@ -101,29 +101,6 @@
             }
         }
 
-    function decrementVariable() {
-        test = test - increment;
-        totalCoins = totalCoins - increment;
-    }
-
-    // Event listener for button click
-    document.getElementById("myButton").addEventListener("click", decrementVariable);
-
-    // Event listener for Enter key press
-    document.addEventListener("keydown", function(event) {
-        // Check if the pressed key is "Enter" and if the focused element is the button
-        if (event.key === "Enter" && document.activeElement.id === "myButton") {
-            // Prevent the default action (e.g., form submission)
-            event.preventDefault();
-            
-            // Decrement the test variable
-            decrementVariable();
-        }
-    });
-
-    // Attach the onkeydown event using addEventListener
-    document.addEventListener("keydown", onKeyPressed);
-
         function updateResult() {
             document.getElementById('result_id').innerHTML = formatNumber2(test);
         }
@@ -133,6 +110,21 @@
             totalCoins = totalCoins + increment;
             updateResult();
         }
+
+        document.addEventListener("keydown", function(event) {
+        // Check if the pressed key is "Enter"
+        if (event.key === "Enter") {
+            // Prevent the default action (e.g., form submission)
+            event.preventDefault();
+            
+            // Optionally, add your logic here based on other conditions before calling f1()
+            // For example, you can check if a specific element has focus, etc.
+            
+            // Call f1 only if the specific conditions are met
+            f1();
+        }
+    });
+
 
         function f2() {
             test = test - increment;
