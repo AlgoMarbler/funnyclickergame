@@ -86,7 +86,9 @@
         }
 
             function formatNumber2(number) {
-            if (number >= 1e15) {
+            if (number >= 1e30) {
+                return number.toExponential(3) + ' (you win!!!)'
+            } else if (number >= 1e15) {
                 return number.toExponential(3);
             } else if (number >= 1e12) {
                 return (number / 1e12).toFixed(2) + ' trillion';
