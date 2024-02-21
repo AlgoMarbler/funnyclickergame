@@ -185,6 +185,8 @@
             localStorage.setItem('cheater', cheater);
             localStorage.setItem('cheattimes', cheattimes);
             localStorage.setItem('$', $);
+            localStorage.setItem('totalCoins', totalCoins);
+            localStorage.setItem('coinsSpent', coinsSpent);
         }
 
         function loadVariables() {
@@ -193,6 +195,8 @@
             increment = parseFloat(localStorage.getItem('increment')) || 1;
             cheater = parseFloat(localStorage.getItem('cheater')) || 0;
             cheattimes = parseFloat(localStorage.getItem('cheattimes')) || 0;
+            totalCoins = parseFloat(localStorage.getItem('totalCoins')) || 0;
+            coinsSpent = parseFloat(localStorage.getItem('coinsSpent')) || 0;
             $ = parseFloat(localStorage.getItem('$')) || 0;
             document.getElementById('result_id').innerHTML = formatNumber2(test);
             document.getElementById('incre').innerHTML = formatNumber2(increment);
