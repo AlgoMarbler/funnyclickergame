@@ -17,62 +17,12 @@
         }
     </style>
     <script type="text/javascript">
-        // Function to set a cookie with expiration
-        function setCookie(name, value, days) {
-            var expires = "";
-            if (days) {
-                var date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + value + expires + "; path=/";
-        }
-
-        // Function to get a cookie by name
-        function getCookie(name) {
-            var nameEQ = name + "=";
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-            }
-            return null;
-        }
-
-        // Function to check if a variable is stored in localStorage and hasn't expired
-        function getStoredVariable(name) {
-            var storedValue = localStorage.getItem(name);
-            if (storedValue) {
-                var expiration = localStorage.getItem(name + "_expiration");
-                if (expiration && new Date() > new Date(expiration)) {
-                    // Variable has expired, clear it
-                    localStorage.removeItem(name);
-                    localStorage.removeItem(name + "_expiration");
-                    return null;
-                }
-                return storedValue;
-            }
-            return null;
-        }
-
-        // Function to set a variable in localStorage with expiration
-        function setStoredVariable(name, value, days) {
-            localStorage.setItem(name, value);
-            if (days) {
-                var expiration = new Date();
-                expiration.setTime(expiration.getTime() + (days * 24 * 60 * 60 * 1000));
-                localStorage.setItem(name + "_expiration", expiration.toUTCString());
-            }
-        }
-
         // Your existing variables and functions
-
-        var test = getStoredVariable("test") || 0;
-        var increment = getStoredVariable("increment") || 1;
-        var cheater = getStoredVariable("cheater") || 0;
-        var cheattimes = getStoredVariable("cheattimes") || 0;
-        var $ = getStoredVariable("$") || 0;
+        var test = 0;
+        var increment = 1;
+        var cheater = 0;
+        var cheattimes = 0;
+        var $ = 0;
 
         function formatNumber(number) {
             if (number >= 1e15) {
@@ -95,12 +45,12 @@
         }
 
         function f1() {
-            test = Number(test) + Number(increment);
+            test = test + increment;
             updateResult();
         }
 
         function f2() {
-            test = Number(test) - Number(increment);
+            test = test - increment;
             updateResult();
         }
 
@@ -112,8 +62,8 @@
 
         function f4(amount, gain) {
             if (test >= amount) {
-                increment = Number(increment) + Number(gain);
-                test = Number(test) - Number(amount);
+                increment = increment + gain;
+                test = test - amount;
                 updateResult();
                 document.getElementById('incre').innerHTML = formatNumber(increment);
             }
@@ -154,12 +104,31 @@
             return ans;
         }
 
-        // Initialization
-        function initialize() {
+        function saveVariables() {
+            // Save all variables to localStorage
+            localStorage.setItem('test', test);
+            localStorage.setItem('increment', increment);
+            localStorage.setItem('cheater', cheater);
+            localStorage.setItem('cheattimes', cheattimes);
+            localStorage.setItem('$', $);
+        }
+
+        function loadVariables() {
+            // Load all variables from localStorage
+            test = parseFloat(localStorage.getItem('test')) || 0;
+            increment = parseFloat(localStorage.getItem('increment')) || 1;
+            cheater = parseFloat(localStorage.getItem('cheater')) || 0;
+            cheattimes = parseFloat(localStorage.getItem('cheattimes')) || 0;
+            $ = parseFloat(localStorage.getItem('$')) || 0;
             updateResult();
         }
 
-        initialize();
+        function updateAndRender() {
+            cheater = $;
+            requestAnimationFrame(updateAndRender);
+        }
+        updateAndRender();
+
     </script>
 </head>
 <body>
@@ -211,6 +180,10 @@
         <input type="text" id="cheat_input" placeholder="Enter cheat value">
         <button onclick="cheat()">Cheat</button>
 
+        <!-- Save button -->
+        <br><br>
+        <button onclick="saveVariables()">Save</button>
+        <button onclick="loadVariables()">Load</button>
     </div>
 </body>
 </html>
