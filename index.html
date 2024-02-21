@@ -65,6 +65,8 @@
         var cheater = 0;
         var cheattimes = 0;
         var $ = 0;
+        var totalCoins = 0;
+        var coinsSpent = 0;
 
 
         function formatNumber(number) {
@@ -103,6 +105,7 @@
 
         function f1() {
             test = test + increment;
+            totalCoins = totalCoins + increment;
             updateResult();
         }
 
@@ -121,6 +124,8 @@
                 increment = 1;
                 cheater = 0;
                 cheattimes = 0;
+                totalCoins = 0;
+                coinsSpent = 0;
                 $ = 0;
                 updateResult();
                 document.getElementById('result_id').innerHTML = formatNumber2(test);
@@ -132,6 +137,7 @@
             if (test >= amount) {
                 increment = increment + gain;
                 test = test - amount;
+                coinsSpent = coinsSpent + amount;
                 updateResult();
                 document.getElementById('incre').innerHTML = formatNumber2(increment);
             }
