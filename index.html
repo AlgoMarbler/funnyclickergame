@@ -66,6 +66,7 @@
         var cheattimes = 0;
         var $ = 0;
 
+
         function formatNumber(number) {
             if (number >= 1e15) {
                 return number.toExponential(3);
@@ -82,8 +83,22 @@
             }
         }
 
+            function formatNumber2(number) {
+            if (number >= 1e15) {
+                return number.toExponential(3);
+            } else if (number >= 1e12) {
+                return (number / 1e12).toFixed(2) + ' trillion';
+            } else if (number >= 1e9) {
+                return (number / 1e9).toFixed(2) + ' billion';
+            } else if (number >= 1e6) {
+                return (number / 1e6).toFixed(2) + ' million';
+            } else {
+                return number.toFixed(0);
+            }
+        }
+
         function updateResult() {
-            document.getElementById('result_id').innerHTML = formatNumber(test);
+            document.getElementById('result_id').innerHTML = formatNumber2(test);
         }
 
         function f1() {
@@ -108,8 +123,8 @@
                 cheattimes = 0;
                 $ = 0;
                 updateResult();
-                document.getElementById('result_id').innerHTML = formatNumber(test);
-                document.getElementById('incre').innerHTML = formatNumber(increment);
+                document.getElementById('result_id').innerHTML = formatNumber2(test);
+                document.getElementById('incre').innerHTML = formatNumber2(increment);
             }
         }
 
@@ -118,7 +133,7 @@
                 increment = increment + gain;
                 test = test - amount;
                 updateResult();
-                document.getElementById('incre').innerHTML = formatNumber(increment);
+                document.getElementById('incre').innerHTML = formatNumber2(increment);
             }
         }
 
@@ -173,18 +188,18 @@
             cheater = parseFloat(localStorage.getItem('cheater')) || 0;
             cheattimes = parseFloat(localStorage.getItem('cheattimes')) || 0;
             $ = parseFloat(localStorage.getItem('$')) || 0;
-            document.getElementById('result_id').innerHTML = formatNumber(test);
-            document.getElementById('incre').innerHTML = formatNumber(increment);
+            document.getElementById('result_id').innerHTML = formatNumber2(test);
+            document.getElementById('incre').innerHTML = formatNumber2(increment);
 
             updateResult();
         }
         function updateAndRender() {
             cheater = $;
-            document.getElementById('test_value').innerHTML = formatNumber(test);
-            document.getElementById('increment_value').innerHTML = formatNumber(increment);
-            document.getElementById('cheater_value').innerHTML = formatNumber(cheater);
-            document.getElementById('cheattimes_value').innerHTML = formatNumber(cheattimes);
-            document.getElementById('dollars_value').innerHTML = formatNumber($);
+            document.getElementById('test_value').innerHTML = formatNumber2(test);
+            document.getElementById('increment_value').innerHTML = formatNumber2(increment);
+            document.getElementById('cheater_value').innerHTML = formatNumber2(cheater);
+            document.getElementById('cheattimes_value').innerHTML = formatNumber2(cheattimes);
+            document.getElementById('dollars_value').innerHTML = formatNumber2($);
 
             // Fix variable names here
             requestAnimationFrame(updateAndRender);
