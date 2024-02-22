@@ -170,7 +170,7 @@
             	test = test-nextAutoClickerCost;
                 nextAutoClickerCost= nextAutoClickerCost*24;
                 document.getElementById('result_id').innerHTML = formatNumber2(test);
-                document.getElementById('costOfAutoClicker').innerHTML = formatNumber2(nextAutoClickerCost);
+                document.getElementById('costOfAutoClicker').innerHTML = "Buy (" + formatNumber2(nextAutoClickerCost) + ")";
                 multiplier=multiplier*1.2;
                 document.getElementById('incre').innerHTML = formatNumber2(multiplier*increment);
                 document.getElementById('multiDisplay').innerHTML = "Current multiplier: <b>" + multiplier.toFixed(2) + "</b>x"
@@ -241,6 +241,8 @@
 
             document.getElementById('result_id').innerHTML = formatNumber2(test);
             document.getElementById('incre').innerHTML = formatNumber2(increment);
+            document.getElementById('costOfAutoClicker').innerHTML = "Buy (" + formatNumber2(nextAutoClickerCost) + ")";
+            document.getElementById('multiDisplay').innerHTML = "Current multiplier: <b>" + multiplier.toFixed(2) + "</b>x"
 
 
 
