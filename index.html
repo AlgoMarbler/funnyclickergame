@@ -174,9 +174,50 @@
                 autoClickerAmount = 0;
                 nextAutoClickerCost = 1e+5;
                 multiplier = 1;
+                f6cost = 5e+6;
+                building1produce = 1;
+                building2produce = 25;
+                building3produce = 750;
+                building4produce = 20000;
+                building5produce = 775000;
+                building6produce = 10000000;
+                building7produce = 750000000;
+                building8produce = 2.5e+10;
+                building9produce = 1.5e+12;
+                building10produce = 6.5e+13;
+                building11produce = 4.5e+14;
+                building12produce = 2.5e+15;
+                building13produce = 5.5e+15;
+                building14produce = 3e+17;
+                building15produce = 1.5e+19;
+                building16produce = 9e+21;
+                building17produce = 4.5e+24;
+                building18produce = 2.5e+26;
                 updateResult();
                 document.getElementById('result_id').innerHTML = formatNumber2(test);
-                document.getElementById('incre').innerHTML = formatNumber2(multiplier*increment);
+                document.getElementById('incre').innerHTML = formatNumber2(increment);
+                document.getElementById('costOfAutoClicker').innerHTML = "Buy (" + formatNumber2(nextAutoClickerCost) + ")";
+                document.getElementById('multiDisplay').innerHTML = "Current multiplier: <b>" + multiplier.toFixed(2) + "</b>x"
+                document.getElementById('costOfbh').innerHTML = "Buy (" + formatNumber2(f6cost) + ")";
+                document.getElementById('building1produce').innerHTML = "Coins Per Click +" + formatNumber(building1produce);
+                document.getElementById('building2produce').innerHTML = "Coins Per Click +" + formatNumber(building2produce);
+                document.getElementById('building3produce').innerHTML = "Coins Per Click +" + formatNumber(building3produce);
+                document.getElementById('building4produce').innerHTML = "Coins Per Click +" + formatNumber(building4produce);
+                document.getElementById('building5produce').innerHTML = "Coins Per Click +" + formatNumber(building5produce);
+                document.getElementById('building6produce').innerHTML = "Coins Per Click +" + formatNumber(building6produce);
+                document.getElementById('building7produce').innerHTML = "Coins Per Click +" + formatNumber(building7produce);
+                document.getElementById('building8produce').innerHTML = "Coins Per Click +" + formatNumber(building8produce);
+                document.getElementById('building9produce').innerHTML = "Coins Per Click +" + formatNumber(building9produce);
+                document.getElementById('building10produce').innerHTML = "Coins Per Click +" + formatNumber(building10produce);
+                document.getElementById('building11produce').innerHTML = "Coins Per Click +" + formatNumber(building11produce);
+                document.getElementById('building12produce').innerHTML = "Coins Per Click +" + formatNumber(building12produce);
+                document.getElementById('building13produce').innerHTML = "Coins Per Click +" + formatNumber(building13produce);
+                document.getElementById('building14produce').innerHTML = "Coins Per Click +" + formatNumber(building14produce);
+                document.getElementById('building15produce').innerHTML = "Coins Per Click +" + formatNumber(building15produce);
+                document.getElementById('building16produce').innerHTML = "Coins Per Click +" + formatNumber(building16produce);
+                document.getElementById('building17produce').innerHTML = "Coins Per Click +" + formatNumber(building17produce);
+                document.getElementById('building18produce').innerHTML = "Coins Per Click +" + formatNumber(building18produce);
+
             }
         }
 
@@ -417,7 +458,7 @@
 </head>
 <body>
     <div id="top_slab">
-        This is v1.0.1. New update will be out on 28/02/2024. Made with love by AlgoMarbler. Check out my YouTube channel <a href="https://youtube.com/c/AlgoMarblerYT">here.</a>
+        This is <b>v1.0.1.</b> New update will be out on <b>28/02/2024.</b> <br>Made with love by AlgoMarbler. Check out my YouTube channel <a href="https://youtube.com/c/AlgoMarblerYT">here.</a>
         <br> Below is a fun (well, not really) exponential clicker game I made. If you have time, try to reach 1,000,000,000,000,000,000,000,000,000,000! (1e+30). 
     </div>
     <div id="left_panel">
