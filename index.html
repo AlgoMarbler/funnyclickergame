@@ -35,7 +35,7 @@
         }
         #right_panel {
             float: right;
-            width: 16%;
+            width: 21%;
             height: 90%;
             background-color: #F0F0F0;
             padding-left: 2%;
@@ -51,7 +51,7 @@
             background-color: #E7E7E7;
         }
         #content {
-            width: 46%;
+            width: 41%;
             float: left;
             padding-left: 2%;
             padding-right: 2%;
@@ -67,7 +67,9 @@
         var $ = 0;
         var totalCoins = 0;
         var coinsSpent = 0;
-
+        var autoClickerAmount = 0;
+        var nextAutoClickerCost = 1e+5;
+        var multiplier = 1;
 
         function formatNumber(number) {
             if (number >= 1e15) {
@@ -106,8 +108,8 @@
         }
 
         function f1() {
-            test = test + increment;
-            totalCoins = totalCoins + increment;
+            test = test + (multiplier*increment);
+            totalCoins = totalCoins + (multiplier*increment);
             updateResult();
         }
 
@@ -127,7 +129,7 @@
 
 
         function f2() {
-            test = test - increment;
+            test = test - (multiplier*increment);
             updateResult();
         }
 
@@ -137,16 +139,19 @@
             
             // Check if the user clicked OK in the confirmation popup
             if (resetConfirmation) {
-                test = 0;
-                increment = 1;
-                cheater = 0;
-                cheattimes = 0;
-                totalCoins = 0;
-                coinsSpent = 0;
-                $ = 0;
+		        test = 0;
+		        increment = 1;
+		        cheater = 0;
+		        cheattimes = 0;
+		        $ = 0;
+		        totalCoins = 0;
+		        coinsSpent = 0;
+		        autoClickerAmount = 0;
+		        nextAutoClickerCost = 1e+5;
+		        multiplier = 1;
                 updateResult();
                 document.getElementById('result_id').innerHTML = formatNumber2(test);
-                document.getElementById('incre').innerHTML = formatNumber2(increment);
+                document.getElementById('incre').innerHTML = formatNumber2(multiplier*increment);
             }
         }
 
@@ -156,8 +161,20 @@
                 test = test - amount;
                 coinsSpent = coinsSpent + amount;
                 updateResult();
-                document.getElementById('incre').innerHTML = formatNumber2(increment);
+                document.getElementById('incre').innerHTML = formatNumber2(multiplier*increment);
             }
+        }
+
+        function f5() {
+            if (test >= nextAutoClickerCost) {
+            	test = test-nextAutoClickerCost;
+                nextAutoClickerCost= nextAutoClickerCost*24;
+                document.getElementById('result_id').innerHTML = formatNumber2(test);
+                document.getElementById('costOfAutoClicker').innerHTML = formatNumber2(nextAutoClickerCost);
+                multiplier=multiplier*1.2;
+                document.getElementById('incre').innerHTML = formatNumber2(multiplier*increment);
+                document.getElementById('multiDisplay').innerHTML = "Current multiplier: <b>" + multiplier.toFixed(2) + "</b>x"
+                }
         }
 
         function cheat() {
@@ -204,6 +221,9 @@
             localStorage.setItem('$', $);
             localStorage.setItem('totalCoins', totalCoins);
             localStorage.setItem('coinsSpent', coinsSpent);
+            localStorage.setItem('autoClickerAmount', autoClickerAmount);
+            localStorage.setItem('nextAutoClickerCost', nextAutoClickerCost); 
+            localStorage.setItem('multiplier', multiplier);           
         }
 
         function loadVariables() {
@@ -215,8 +235,14 @@
             totalCoins = parseFloat(localStorage.getItem('totalCoins')) || 0;
             coinsSpent = parseFloat(localStorage.getItem('coinsSpent')) || 0;
             $ = parseFloat(localStorage.getItem('$')) || 0;
+            autoClickerAmount = parseFloat(localStorage.getItem('autoClickerAmount')) || 0;
+            nextAutoClickerCost = parseFloat(localStorage.getItem('nextAutoClickerCost')) || 1e+5;
+            multiplier = parseFloat(localStorage.getItem('multiplier')) || 1;
+
             document.getElementById('result_id').innerHTML = formatNumber2(test);
             document.getElementById('incre').innerHTML = formatNumber2(increment);
+
+
 
             updateResult();
         }
@@ -230,9 +256,11 @@
 
             // Fix variable names here
             requestAnimationFrame(updateAndRender);
+            updateResult();
         }
         updateAndRender();
 
+       
         
     </script>
 </head>
@@ -252,15 +280,15 @@
         <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(20000000000, 750000000)">Coins Per Click +750M (Cost: 20B coins)</button><br>
         <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(1000000000000, 25000000000)">Coins Per Click +25B (Cost: 1T coins)</button><br>
         <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(400000000000000, 1500000000000)">Coins Per Click +1.5T (Cost: 400T coins)</button><br>
-        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(2e+16, 100000000000000)">Coins Per Click +100T (Cost: 2e+16 coins)</button><br>
-        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(1.5e+17, 750000000000000)">Coins Per Click +750T (Cost: 1.5e+17 coins)</button><br>
-        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(9e+17, 4500000000000000)">Coins Per Click +4500T (Cost: 9e+17 coins)</button><br>
-        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(5e+18, 1.75e+16)">Coins Per Click +1.75e+16 (Cost: 5e+18 coins)</button><br>
-        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(2.5e+20, 1e+18)">Coins Per Click +1e+18 (Cost: 2.5e+20 coins)</button><br>
-        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(1.7e+22, 9.5e+19)">Coins Per Click +9.5e+19 (Cost: 1.7e+22 coins)</button><br>
-        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(1e+24, 6e+22)">Coins Per Click +6e+22 (Cost: 1e+24 coins)</button><br>
-        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(9.95e+27, 4.5e+25)">Coins Per Click +4.5e+25 (Cost: 9.95e+27 coins)</button><br>
-        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(3e+29, 2.5e+27)">Coins Per Click +2.5e+27 (Cost: 3e+29 coins)</button><br>
+        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(2e+16, 65000000000000)">Coins Per Click +65T (Cost: 2e+16 coins)</button><br>
+        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(1.5e+17, 450000000000000)">Coins Per Click +450T (Cost: 1.5e+17 coins)</button><br>
+        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(9e+17, 2500000000000000)">Coins Per Click +2500T (Cost: 9e+17 coins)</button><br>
+        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(5e+18, 5.5e+15)">Coins Per Click +5.5e+15 (Cost: 5e+18 coins)</button><br>
+        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(2.5e+20, 3e+17)">Coins Per Click +3e+17 (Cost: 2.5e+20 coins)</button><br>
+        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(1.7e+22, 1.5e+19)">Coins Per Click +1.5e+19 (Cost: 1.7e+22 coins)</button><br>
+        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(1e+24, 9e+21)">Coins Per Click +9e+21 (Cost: 1e+24 coins)</button><br>
+        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(9.95e+27, 4.5e+24)">Coins Per Click +4.5e+24 (Cost: 9.95e+27 coins)</button><br>
+        <button style="text-align: left; padding-left: 15%; height: 3%; font-size: 80%; width: 100%" onclick="f4(3e+29, 2.5e+26)">Coins Per Click +2.5e+26 (Cost: 3e+29 coins)</button><br>
 
         <!-- Save button -->
         <br>
@@ -316,11 +344,13 @@ Step ASIAN) u are a true Asian and will no longer have to face the terrible trut
         <br><br><br><br><br><br>
     </div>
     <div id="right_panel">
-        <div style="font-size: 48px">BOARD O' STATS</div>
-        <div style="font-size: 20px; margin-top: 20px;">
-        coming soon. 
+        <div style="font-size: 48px">BOARD O' UPGRADES</div>
+        <div>
+        <div style="font-size: 20px; margin-top: 20px; margin-bottom: 10px;" id="AutoClickers">Clicky Boosty         
+        	<button id="costOfAutoClicker" style="text-align: left; height: 3%; font-size: 80%;  margin-left: 3%; margin-right: 3%; " onclick="f5()">Buy (100000)</button><br></div>
+        <div style="font-size: 14px; margin-top: 10px;margin-bottom: 5px">Increases your coins per click by 20%</div>     
+        <div id="multiDisplay" style="font-size: 16px; margin-top: 10px;margin-bottom: 20px">Current multiplier: <b>1.00</b>x</div>     
     </div>
-
     </div>
 </body>
 </html>
