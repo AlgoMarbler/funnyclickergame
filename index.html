@@ -71,6 +71,28 @@
         var nextAutoClickerCost = 1e+5;
         var multiplier = 1;
         var f6cost = 5e+6;
+
+        var defaultBuilding1produce = 1;
+        var defaultBuilding2produce = 25;
+        var defaultBuilding3produce = 750;
+        var defaultBuilding4produce = 20000;
+        var defaultBuilding5produce = 775000;
+        var defaultBuilding6produce = 10000000;
+        var defaultBuilding7produce = 750000000;
+        var defaultBuilding8produce = 2.5e+10;
+        var defaultBuilding9produce = 1.5e+12;
+        var defaultBuilding10produce = 6.5e+13;
+        var defaultBuilding11produce = 4.5e+14;
+        var defaultBuilding12produce = 2.5e+15;
+        var defaultBuilding13produce = 5.5e+15;
+        var defaultBuilding14produce = 3e+17;
+        var defaultBuilding15produce = 1.5e+19;
+        var defaultBuilding16produce = 9e+21;
+        var defaultBuilding17produce = 4.5e+24;
+        var defaultBuilding18produce = 2.5e+26;
+        var defaultBuilding19produce = 3e+31;
+
+        
         var building1produce = 1;
         var building2produce = 25;
         var building3produce = 750;
@@ -89,6 +111,7 @@
         var building16produce = 9e+21;
         var building17produce = 4.5e+24;
         var building18produce = 2.5e+26;
+        var building19produce = 3e+31;
 
         function formatNumber(number) {
             if (number >= 1e15) {
@@ -113,7 +136,7 @@
         }
 
             function formatNumber2(number) {
-            if (number >= 1e30) {
+            if (number >= 1e40) {
                 return number.toExponential(3) + ' (you win!!!)'
             } else if (number >= 1e15) {
                 return number.toExponential(3);
@@ -193,6 +216,7 @@
                 building16produce = 9e+21;
                 building17produce = 4.5e+24;
                 building18produce = 2.5e+26;
+                building19produce = 3e+31;
                 updateResult();
                 document.getElementById('result_id').innerHTML = formatNumber2(test);
                 document.getElementById('incre').innerHTML = formatNumber2(increment);
@@ -217,6 +241,7 @@
                 document.getElementById('building16produce').innerHTML = "Coins Per Click +" + formatNumber(building16produce);
                 document.getElementById('building17produce').innerHTML = "Coins Per Click +" + formatNumber(building17produce);
                 document.getElementById('building18produce').innerHTML = "Coins Per Click +" + formatNumber(building18produce);
+                document.getElementById('building19produce').innerHTML = "Coins Per Click +" + formatNumber(building19produce);
 
             }
         }
@@ -240,6 +265,9 @@
                 multiplier=multiplier*1.2;
                 document.getElementById('incre').innerHTML = formatNumber2(multiplier*increment);
                 document.getElementById('multiDisplay').innerHTML = "Current multiplier: <b>" + multiplier.toFixed(2) + "</b>x"
+                building19produce=building19produce*1.2;
+                document.getElementById('building19produce').innerHTML = "Coins Per Click +" + formatNumber(building19produce);
+                // gap
                 building18produce=building18produce*1.2;
                 document.getElementById('building18produce').innerHTML = "Coins Per Click +" + formatNumber(building18produce);
                 // gap
@@ -373,6 +401,7 @@
             localStorage.setItem('building16produce', building16produce);
             localStorage.setItem('building17produce', building17produce);
             localStorage.setItem('building18produce', building18produce);
+            localStorage.setItem('building19produce', building19produce);
 
         }
 
@@ -407,6 +436,7 @@
             building16produce = parseFloat(localStorage.getItem('building16produce')) || 9e+21;
             building17produce = parseFloat(localStorage.getItem('building17produce')) || 4.5e+24;
             building18produce = parseFloat(localStorage.getItem('building18produce')) || 2.5e+26;
+            building18produce = parseFloat(localStorage.getItem('building19produce')) || 3e+31;
 
 
             document.getElementById('result_id').innerHTML = formatNumber2(test);
@@ -432,6 +462,7 @@
             document.getElementById('building16produce').innerHTML = "Coins Per Click +" + formatNumber(building16produce);
             document.getElementById('building17produce').innerHTML = "Coins Per Click +" + formatNumber(building17produce);
             document.getElementById('building18produce').innerHTML = "Coins Per Click +" + formatNumber(building18produce);
+            document.getElementById('building19produce').innerHTML = "Coins Per Click +" + formatNumber(building19produce);
 
 
 
@@ -481,6 +512,7 @@
         <button style="text-align: center; padding-left: 5%; padding-right: 5%; height: 3%; font-size: 80%; width: 40%" onclick="f4(1e+24, 9e+21)">Buy (1e+24)</button><span id = "building16produce" style="text-align: left; padding-left: 5%; height: 3%; width: 73%; padding-right: 5%">Coins Per Click +9e+21</span><br>
         <button style="text-align: center; padding-left: 5%; padding-right: 5%; height: 3%; font-size: 80%; width: 40%" onclick="f4(9.95e+27, 4.5e+24)">Buy (9.95e+27)</button><span id = "building17produce" style="text-align: left; padding-left: 5%; height: 3%; width: 73%; padding-right: 5%">Coins Per Click +4.5e+24</span><br>
         <button style="text-align: center; padding-left: 5%; padding-right: 5%; height: 3%; font-size: 80%; width: 40%" onclick="f4(3e+29, 2.5e+26)">Buy (3e+29)</button><span id = "building18produce" style="text-align: left; padding-left: 5%; height: 3%; width: 73%; padding-right: 5%">Coins Per Click +2.5e+26</span><br>
+        <button style="text-align: center; padding-left: 5%; padding-right: 5%; height: 3%; font-size: 80%; width: 40%" onclick="f4(8e+34, 3e+31)">Buy (8e+34)</button><span id = "building19produce" style="text-align: left; padding-left: 5%; height: 3%; width: 73%; padding-right: 5%">Coins Per Click +3e+31</span><br>
 
         <!-- Save button -->
         <br>
